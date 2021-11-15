@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css"
+import { BrowserRouter, Switch, Route } from "react-router-dom"
+import Home from "./Pages/Home/Home"
+import MainLayout from "./Layouts/MainLayout"
+import CityInformation from "./Pages/CityInformation/CityInformation"
+import Notfound from "./Pages/NotFound/Notfound"
+import BadRequest from "./Pages/BadRequest/BadRequest"
 function App() {
+  document.title = "Api Weather"
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <MainLayout>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/cityInformation/:city" exact>
+            <CityInformation />
+          </Route>
+          <Route path="/404" exact>
+            <Notfound />
+          </Route>
+          <Route path="/400" exact>
+            <BadRequest />
+          </Route>
+          <Route path="*">
+            <Notfound />
+          </Route>
+        </Switch>
+      </MainLayout>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
